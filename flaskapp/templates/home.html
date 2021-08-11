@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+{% for news in newses %}
+    <article class="media content-section">
+        <div class="media-body">
+        <div class="article-metadata">
+            <a class="mr-2" href="#">{{ news.news_owner.name }}</a>
+            <small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+        </div>
+        <h2><a class="article-title" href="{{ news.news_url }}">{{ news.title }}</a></h2>
+        </div>
+    </article>
+{% endfor %}
+{% endblock %}

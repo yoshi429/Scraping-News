@@ -1,0 +1,18 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    {% for my_news in my_news_list %}
+        <article class="media content-section">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">{{ my_news.news.news_owner.name }}</a>
+                <small class="text-muted">{{ my_news.news.date.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ my_news.news.news_url }}">{{ my_news.news.title }}</a></h2>
+            <form action="{{ url_for('remove_my_list_news', news_id=my_news.news.id) }}" method="POST">
+                <input class="btn btn-info btn-sm m-1" type="submit" value="外す">
+            </form>
+            </div>
+        </article>  
+    {% endfor %}
+{% endblock %}

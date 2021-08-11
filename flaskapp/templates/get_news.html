@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+    <form method="POST" action="">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.submit(class="btn btn-outline-info") }}
+        </div>
+    </form>
+    {% for news in newses %}
+        <article class="media content-section">
+          <div class="media-body">
+            <div class="article-metadata">
+              <a class="mr-2" href="#">{{ news.news_owner.name }}</a>
+              <small class="text-muted">{{ news.date.strftime('%Y-%m-%d') }}</small>
+            </div>
+            <h2><a class="article-title" href="{{ news.news_url }}">{{ news.title }}</a></h2>
+            <div class="btn-group ml-auto">
+              <form action="{{ url_for('add_my_list_news', news_id=news.id) }}" method="POST">
+                <input class="btn btn-info" type="submit" value="追加">
+              </form>
+              <form action="{{ url_for('delete_news', news_id=news.id) }}" class="" method='POST'>
+                <input class="btn btn-danger" type='submit' value='削除'>
+              </form>
+            </div>
+          </div>
+        </article>  
+    {% endfor %}
+{% endblock %}
